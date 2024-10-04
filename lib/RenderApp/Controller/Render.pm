@@ -304,4 +304,12 @@ sub jwtFromRequest {
     return $c->render( text => $req_jwt );
 }
 
+sub display {
+  my $c = shift;
+  #my $param = $c->param('problempath');
+  my $problempath = $c->req->url->query->param("path");
+
+  return $c->render( text => $problempath );
+}
+
 1;

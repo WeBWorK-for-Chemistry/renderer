@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WeBWorK Standalone Renderer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    %= stylesheet '/navbar.css'
+  </head>
+  <body>
+    <div class="topnav" id="myTopnav">
+      <div class="dropdown" id="template-select-dropdown">
+        <button class="dropbtn" id="template-select">Template
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#" class="dropdown-item" id="static">Static <i class="fa fa-check" aria-hidden="true"></i></a>
+          <a href="#" class="dropdown-item" id="single">Single <i class="fa fa-check" aria-hidden="true"></i></a>
+          <a href="#" class="dropdown-item" id="practice">Practice <i class="fa fa-check" aria-hidden="true"></i></a>
+          <a href="#" class="dropdown-item" id="classic">Classic <i class="fa fa-check" aria-hidden="true"></i></a>
+          <a href="#" class="dropdown-item" id="simple">Simple <i class="fa fa-check" aria-hidden="true"></i></a>
+          <a href="#" class="dropdown-item" id="standard">Standard <i class="fa fa-check" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="filebrowserDiv">
+
+        <button id="modalButton">Choose a file...</button>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            %= include 'columns/chemfilebrowser'
+          </div>
+        </div>
+      </div>
+              <script>
+        // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("modalButton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+        </script>
+      <div class="search-container" >
+        <!--form action="/ui" method="POST" id="topnav-form"-->
+          <span id="hiddenSourceFilePath"></span>
+          <input type="text" placeholder="file path..." name="sourceFilePath" id="sourceFilePath">
+          <input type="text" placeholder="random seed..." name="problemSeed" id="problemSeed" style="width:130px;">
+          <button type="button" id="save-problem">Save</button>
+          <button type="button" id="load-problem">Load</button>
+        <!--/form-->
+      </div>
+    </div>
+    <%= content %>
+    %= javascript '/navbar.js'
+  </body>
+</html>
