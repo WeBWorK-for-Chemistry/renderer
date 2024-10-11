@@ -11,4 +11,9 @@ sub oplUI {
     $c->render(template=>'pages/oplUI');
 }
 
+sub test {
+    my $c = shift;
+    $c->render(template=>'pages/test');
+}
+
 1;

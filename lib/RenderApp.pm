@@ -148,7 +148,7 @@ sub startup {
     );    #->to('render#display');
     if ( $self->mode eq 'development' ) {
         $r->any('/')->to('pages#twocolumn');
-        $r->any('/test')->to('pages#test');
+        $r->any('/renderer')->to('pages#test');
         $r->any('/opl')->to('pages#oplUI');
         $r->any( '/die' => sub { die "what did you expect, flowers?" } );
         $r->any(

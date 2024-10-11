@@ -154,7 +154,7 @@ sub formatRenderedProblem {
 
 	my $XML_URL            = $self->url                         // '';
 	my $FORM_ACTION_URL    = $self->{form_action_url}           // '';
-	my $SITE_URL           = $self->{baseURL}                   // '';
+	my $SITE_URL           = 'https://2yc3.org'; #$self->{baseURL}                   // '';
 	my $SITE_HOST          = $ENV{SITE_HOST}                    // '';
 	my $courseID           = $self->{courseID}                  // '';
 	my $userID             = $self->{userID}                    // '';

@@ -26,50 +26,9 @@ let problemiframe = document.getElementById("rendered-problem");
 
 problemiframe.addEventListener('load', () => { console.log("loaded..."); insertListener(); activeButton(); } )
 
-savebutton.addEventListener("click", event => {
-  const writeurl = '/render-api/can'
-
-  let formData = new FormData()
-
-//  // Version tracking steps to replace window.btoa with code supporting Unicode text
-//  encoder = new TextEncoder();
-//  let text16 = cm.getValue();
-//  let text8array = encoder.encode(text16);
-//  console.log( text8array );
-//  let textbase64 = Base64.fromUint8Array( text8array );
-//  console.log( textbase64 );
-//  formData.set("problemSource", textbase64 );
-
-  encoder = new TextEncoder();
-  formData.set("problemSource", Base64.fromUint8Array(encoder.encode(cm.getValue())));
-
-  formData.set("writeFilePath", document.getElementById('sourceFilePath').value)
-  const write_params = {
-    body : formData,
-    method : "post"
-  }
-
-  fetch(writeurl, write_params).then(function(response) {
-    if (response.ok) {
-      return response.text();
-    } else {
-      return response.json();
-    }
-  }).then(function(data) {
-    if (data.message) {
-      throw new Error("Could not write to file: " + data.message);
-    } else {
-      document.getElementById("currentEditPath").innerText = document.getElementById('sourceFilePath').value;
-      alert("Successfully written to file: " + data);
-    }
-  }).catch(function(e) {
-    alert(e.message);
-  });
-})
-
 loadbutton.addEventListener("click", event => {
   event.preventDefault();
-  const sourceurl = '/render-api/tap'
+  const sourceurl = '/webwork/render-api/tap'
 
   let formData = new FormData();
   formData.set("sourceFilePath", document.getElementById('sourceFilePath').value);
@@ -96,13 +55,13 @@ loadbutton.addEventListener("click", event => {
 renderbutton.addEventListener("click", event => {
   event.preventDefault();
   document.getElementById("rendered-problem").srcdoc = "Loading...";
-  const renderurl = '/render-api';
+  const renderurl = '/webwork/render-api';
 
   const selectedformat = document.querySelector(".dropdown-item.selected");
   let outputFormat;
   if ( selectedformat === null) {
     console.log(typeof selectedformat);
-    alert("No output format selected. Defaulting to 'classic' format.");
+    //alert("No output format selected. Defaulting to 'classic' format.");
     outputFormat = 'classic';
   } else {
     outputFormat = selectedformat.id;
@@ -178,7 +137,7 @@ function insertListener() {
     const selectedformat = document.querySelector(".dropdown-item.selected");
     let outputFormat;
     if ( selectedformat === null ) {
-      alert("No output format selected. Defaulting to 'classic' format.");
+      //alert("No output format selected. Defaulting to 'classic' format.");
       outputFormat = 'classic';
     } else {
       outputFormat = selectedformat.id;
@@ -206,7 +165,7 @@ function insertListener() {
     [...document.querySelectorAll('.checkbox-input:checked')].map(e => e.name).forEach((box) => {
       formData.append(box, 1);
     });
-    const submiturl = '/render-api'
+    const submiturl = '/webwork/render-api'
     const submit_params = {
       body : formData,
       method : "post"

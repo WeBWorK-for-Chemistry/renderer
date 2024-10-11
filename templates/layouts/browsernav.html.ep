@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    %= stylesheet '/navbar.css'
+    %= stylesheet '/webwork/navbar.css'
   </head>
   <body>
     <div class="topnav" id="myTopnav">
@@ -24,7 +24,7 @@
       </div>
       <div class="filebrowserDiv">
 
-        <button id="modalButton">Choose a file...</button>
+        <button type="button" id="modalButton">Choose a file...</button>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
@@ -63,13 +63,12 @@ window.onclick = function(event) {
         <!--form action="/ui" method="POST" id="topnav-form"-->
           <span id="hiddenSourceFilePath"></span>
           <input type="text" placeholder="file path..." name="sourceFilePath" id="sourceFilePath">
-          <input type="text" placeholder="random seed..." name="problemSeed" id="problemSeed" style="width:130px;">
-          <button type="button" id="save-problem">Save</button>
-          <button type="button" id="load-problem">Load</button>
+          <input type="text" placeholder="random seed..." name="problemSeed" id="problemSeed" value="1234" style="width:130px;">
+         <button type="button" id="load-problem">Load</button>
         <!--/form-->
       </div>
     </div>
     <%= content %>
-    %= javascript '/navbar.js'
+    %= javascript '/webwork/navbar.js'
   </body>
 </html>

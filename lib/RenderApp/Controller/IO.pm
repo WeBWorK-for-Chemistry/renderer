@@ -13,7 +13,7 @@ use WeBWorK::Utils::Tags;
 our $regex = {
     anyPg      => qr/.+\.pg$/,
     allPathsPg =>
-qr/^(:?private\/|Contrib\/|webwork-open-problem-library\/Contrib\/|Library\/|webwork-open-problem-library\/OpenProblemLibrary\/)(?!\.\.\/).*\.pg$/,
+qr/^(:?private\/|Contrib\/|webwork-open-problem-library\/Contrib\/|Library\/|Library\/)(?!\.\.\/).*\.pg$/,
     publicOnlyPg =>
 qr/^(:?Contrib\/|webwork-open-problem-library\/Contrib\/|Library\/|webwork-open-problem-library\/OpenProblemLibrary\/)(?!\.\.\/).*\.pg$/,
     privateOnlyPg => qr/^private\/(?!\.\.\/).*\.pg$/,
@@ -136,38 +136,43 @@ async sub catalog {
       };
     my $validatedInput =
       $c->validateRequest( { required => $required, optional => $optional } );
+
     return unless $validatedInput;
     my $root_path = $validatedInput->{basePath};
     my $depth     = $validatedInput->{maxDepth} // 2;
 
     $root_path =~ s!\s+|\.\./!!g;
-    $root_path =~ s!^Library/!webwork-open-problem-library/OpenProblemLibrary/!;
-    $root_path =~ s!^Contrib/!webwork-open-problem-library/Contrib/!;
-    $root_path =~ s!^Pending/!webwork-open-problem-library/Pending/!;
+#    $root_path =~ s!^Library/!webwork-open-problem-library/OpenProblemLibrary/!;
+#    $root_path =~ s!^Contrib/!webwork-open-problem-library/Contrib/!;
+#    $root_path =~ s!^Pending/!webwork-open-problem-library/Pending/!;
 
     #$root_path =~ s!^ChemLibrary/!webwork-open-problem-library/chem-library/!;
 
     $root_path =~ s!/$!!
       ; # strip trailing slashes so that Library/ and Contrib/ act like other directories
 
+print $root_path . "\n";
+#return $c->rendered(200);
+
+print $root_path;
     if ( $depth == 0 || !-d $root_path ) {
 
         # warn($root_path) if !(-e $root_path);
         return ( -e $root_path ) ? $c->rendered(200) : $c->rendered(404);
     }
 
-    if (
-        !(
-            $root_path =~
-            /^(:?webwork-open-problem-library\/.*|private\/.*|private)$/
-        )
-      )
-    {
-        $c->log->warn(
-"Someone is cataloguing a path outside of OPL and private! $root_path"
-        );
-        return $c->rendered(403);
-    }
+ #   if (
+ #       !(
+ #           $root_path =~
+ #           /^(:?webwork-open-problem-library\/.*|private\/.*|private)$/
+ #       )
+ #     )
+ #   {
+ #       $c->log->warn(
+#"Someone is cataloguing a path outside of OPL and private! $root_path"
+#        );
+#        return $c->rendered(403);
+#    }
     $c->render_later;
     my ( $results, $status ) = await depthSearch_p( $root_path, $depth );
     $c->render( json => $results, status => $status );

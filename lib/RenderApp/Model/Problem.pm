@@ -116,7 +116,7 @@ sub path {
         $read_path =~ s!\s+|\.\./!!g;    # prevent backtracking and whitespace
         my $opl_root = $ENV{OPL_DIRECTORY};
         if ( $read_path =~ m!^Library/! ) {
-            $read_path =~ s!^Library/!$opl_root/OpenProblemLibrary/!;
+            #$read_path =~ s!^Library/!$opl_root/OpenProblemLibrary/!;
             $self->{write_allowed} = 0;
         }
         elsif ( $read_path =~ m!^Contrib! ) {

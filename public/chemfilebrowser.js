@@ -28,12 +28,12 @@ function updateBrowser(formId, updateBackNav) {
         } else {
             outputFormat = selectedformat.id;
         }
-        let problemseed = 1234;
+//        let problemseed = 1234;
         const seedinput = document.getElementById('problemSeed');
         if (!isNaN(seedinput.value) && +seedinput.value !== 0) {
             problemseed = +document.getElementById('problemSeed').value;
         }
-        target = '/render-api/';
+        target = '/webwork/render-api/';
         formData.set('sourceFilePath', value);
         formData.set('problemSeed', problemseed);
         formData.set('outputFormat', outputFormat);
@@ -42,7 +42,7 @@ function updateBrowser(formId, updateBackNav) {
         formData.set('includeTags', 1);
         formData.set('showComments', 1);
 
-        const sourceurl = '/render-api/tap';
+        const sourceurl = '/webwork/render-api/tap';
         let formDataRawFile = new FormData();
         formDataRawFile.set("sourceFilePath", value);
         const source_params = {

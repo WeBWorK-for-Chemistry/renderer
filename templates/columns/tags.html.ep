@@ -1,4 +1,4 @@
-%= stylesheet '/tags.css'
+%= stylesheet '/webwork/tags.css'
 
 % my $taxo = '[]';
 % if (open(TAXONOMY, "<:encoding(utf8)", $ENV{WEBWORK_ROOT}.'/htdocs/DATA/tagging-taxonomy.json') ) {

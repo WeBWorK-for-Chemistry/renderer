@@ -1,5 +1,5 @@
-%= stylesheet $ENV{SITE_HOST} . '/typing-sim.css'
-%= stylesheet $ENV{SITE_HOST} . '/crt-display.css'
+%= stylesheet $ENV{SITE_HOST} . '/webwork/typing-sim.css'
+%= stylesheet $ENV{SITE_HOST} . '/webwork/crt-display.css'
 %= javascript begin
 window.onload = function() {
     var i = 0;

@@ -108,6 +108,8 @@ body * {
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
   height: 90%;
+  display: flex;
+  flex-direction: column;
 }
 
 .close {
@@ -151,6 +153,24 @@ body * {
 .topnav .search-container button:hover {
   background: #A0B0BD;
 }
+
+.topnav .filebrowserDiv button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 7px;
+  margin-right: 16px;
+  background: #C0CAD3;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .filebrowserDiv button:hover {
+  background: #A0B0BD;
+}
+
+
+
 
 @media screen and (max-width: 600px) {
   .topnav .search-container {

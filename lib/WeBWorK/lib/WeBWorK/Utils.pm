@@ -273,19 +273,19 @@ sub getAssetURL {
 
 	# Now check to see if this is a file in the pg htdocs location with a rtl variant.
 	# These also can only be local files.
-	return "/pg_files/$staticPGAssets->{$rtlfile}" if defined $rtlfile && defined $staticPGAssets->{$rtlfile};
+	return "/webwork/pg_files/$staticPGAssets->{$rtlfile}" if defined $rtlfile && defined $staticPGAssets->{$rtlfile};
 
 	# Next check to see if this is a file in the pg htdocs location.
 	if (defined $staticPGAssets->{$file}) {
 		# File served by cdn.
 		return $staticPGAssets->{$file} if $staticPGAssets->{$file} =~ /^https?:\/\//;
 		# File served locally.
-		return "/pg_files/$staticPGAssets->{$file}";
+		return "/webwork/pg_files/$staticPGAssets->{$file}";
 	}
 
 	# If the file was not found in the lists, then just use the given file and assume its path is relative to the pg
 	# htdocs location.
-	return "/pg_files/$file";
+	return "/webwork/pg_files/$file";
 }
 
 
